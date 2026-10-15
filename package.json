@@ -27,7 +27,7 @@
     "type": "module",
     "sideEffects": false,
     "bin": {
-        "add-agent-skills": "./dist/cli.js"
+        "add-agent-skills": "dist/cli.js"
     },
     "main": "./dist/mod.js",
     "types": "./dist/mod.d.ts",

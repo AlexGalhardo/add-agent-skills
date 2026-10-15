@@ -1,0 +1,22 @@
+{
+    "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
+    "release-type": "node",
+    "include-component-in-tag": false,
+    "packages": {
+        ".": {
+            "package-name": "@galhardoalex/add-agent-skills",
+            "skip-changelog": true,
+            "extra-files": [
+                {
+                    "type": "json",
+                    "path": "jsr.json",
+                    "jsonpath": "$.version"
+                },
+                {
+                    "type": "generic",
+                    "path": "src/version.ts"
+                }
+            ]
+        }
+    }
+}

@@ -1,0 +1,80 @@
+{
+    "name": "@galhardoalex/add-agent-skills",
+    "version": "1.0.0",
+    "description": "Interactive CLI that installs curated, open source agent skills (SKILL.md) into .claude/skills, .agents/skills, .cursor/skills and .github/skills, always fetching the latest version from each skill's official GitHub repository.",
+    "keywords": [
+        "agent-skills",
+        "skills",
+        "claude-code",
+        "claude",
+        "codex",
+        "cursor",
+        "copilot",
+        "cli",
+        "ai",
+        "skill-md"
+    ],
+    "author": "Alex Galhardo <aleexgvieira@gmail.com>",
+    "license": "MIT",
+    "homepage": "https://github.com/AlexGalhardo/add-agent-skills#readme",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/AlexGalhardo/add-agent-skills.git"
+    },
+    "bugs": {
+        "url": "https://github.com/AlexGalhardo/add-agent-skills/issues"
+    },
+    "type": "module",
+    "sideEffects": false,
+    "bin": {
+        "add-agent-skills": "./dist/cli.js"
+    },
+    "main": "./dist/mod.js",
+    "types": "./dist/mod.d.ts",
+    "exports": {
+        ".": {
+            "types": "./dist/mod.d.ts",
+            "default": "./dist/mod.js"
+        },
+        "./package.json": "./package.json"
+    },
+    "files": [
+        "dist",
+        "README.md",
+        "LICENSE"
+    ],
+    "engines": {
+        "node": ">=20"
+    },
+    "publishConfig": {
+        "access": "public",
+        "provenance": true
+    },
+    "scripts": {
+        "build": "bun run scripts/build.ts",
+        "test": "bun test",
+        "typecheck": "tsc -p tsconfig.json",
+        "lint": "biome check .",
+        "format": "biome check --write .",
+        "catalog:refresh": "bun run scripts/catalog-refresh.ts",
+        "changelog": "bun run scripts/changelog.ts",
+        "check:package": "publint --strict && attw --pack . --profile esm-only",
+        "check:jsr": "bunx jsr publish --dry-run --allow-dirty",
+        "check": "bun run lint && bun run typecheck && bun test && bun run build && bun run check:package",
+        "prepublishOnly": "bun run build",
+        "prepare": "husky"
+    },
+    "dependencies": {
+        "@clack/prompts": "1.8.1"
+    },
+    "devDependencies": {
+        "@arethetypeswrong/cli": "0.18.5",
+        "@biomejs/biome": "2.5.15",
+        "@commitlint/cli": "21.2.3",
+        "@commitlint/config-conventional": "21.2.3",
+        "@types/bun": "1.4.3",
+        "husky": "9.1.7",
+        "publint": "0.3.25",
+        "typescript": "7.0.2"
+    }
+}

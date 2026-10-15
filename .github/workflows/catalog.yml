@@ -1,0 +1,38 @@
+name: Catalog
+
+# Weekly: re-reads every skill's SKILL.md upstream. If a description or license changed, opens a PR
+# with the updated src/catalog.json. If a skill moved or was removed upstream, the run fails, so the
+# path can be fixed by hand.
+
+on:
+  schedule:
+    - cron: "0 9 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v7
+      - uses: oven-sh/setup-bun@v2
+      - run: bun run catalog:refresh
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+      - name: Open a PR if catalog.json changed
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if git diff --quiet src/catalog.json; then echo "catalog.json is up to date"; exit 0; fi
+          BRANCH=chore/catalog-refresh
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -C "$BRANCH"
+          git commit -am "fix(catalog): refresh skill descriptions from upstream"
+          git push --force origin "$BRANCH"
+          gh pr view "$BRANCH" >/dev/null 2>&1 || gh pr create --fill --head "$BRANCH"

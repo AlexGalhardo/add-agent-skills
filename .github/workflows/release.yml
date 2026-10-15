@@ -1,0 +1,125 @@
+name: Release
+
+# 1. On every push to main, release-please opens/updates a "chore(main): release x.y.z" PR
+#    with the version bump (package.json + jsr.json); a follow-up step writes the CHANGELOG.md
+#    section (Keep a Changelog) into that PR from the Conventional Commits.
+# 2. Merging that PR creates the git tag + GitHub Release, and the publish
+#    jobs below publish the new version to npm and JSR (independently).
+# 3. "Run workflow" (workflow_dispatch) re-publishes the current version; versions that
+#    already exist on a registry are skipped, so it is safe to re-run.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  release-please:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    outputs:
+      release_created: ${{ steps.release.outputs.release_created }}
+      tag_name: ${{ steps.release.outputs.tag_name }}
+    steps:
+      - uses: googleapis/release-please-action@v5
+        id: release
+        with:
+          config-file: release-please-config.json
+          manifest-file: .release-please-manifest.json
+
+      # release-please has skip-changelog on, because its format isn't Keep a Changelog.
+      # Instead, write the CHANGELOG.md section into the release PR from the Conventional Commits.
+      # release-please rebuilds the PR branch on every push to main, so this re-runs every time.
+      - uses: actions/checkout@v7
+        if: steps.release.outputs.pr
+        with:
+          ref: ${{ fromJSON(steps.release.outputs.pr).headBranchName }}
+          fetch-depth: 0
+      - uses: oven-sh/setup-bun@v2
+        if: steps.release.outputs.pr
+      - name: Write CHANGELOG.md section into the release PR
+        if: steps.release.outputs.pr
+        run: |
+          bun run scripts/changelog.ts
+          if git diff --quiet CHANGELOG.md; then exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -am "docs(changelog): update for v$(node -p "require('./package.json').version")"
+          git push
+
+      # Replace release-please's generated notes with the Keep a Changelog section of the new version.
+      - uses: actions/checkout@v7
+        if: steps.release.outputs.release_created == 'true'
+        with:
+          ref: ${{ steps.release.outputs.tag_name }}
+      - uses: oven-sh/setup-bun@v2
+        if: steps.release.outputs.release_created == 'true'
+      - name: Use the CHANGELOG.md section as the GitHub Release notes
+        if: steps.release.outputs.release_created == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ steps.release.outputs.tag_name }}
+        run: |
+          bun run scripts/changelog.ts "${TAG#v}" --notes > "$RUNNER_TEMP/notes.md"
+          gh release edit "$TAG" --notes-file "$RUNNER_TEMP/notes.md"
+
+  publish-npm:
+    needs: release-please
+    if: always() && (needs.release-please.outputs.release_created == 'true' || github.event_name == 'workflow_dispatch')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write # OIDC: npm Trusted Publishing + provenance
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ needs.release-please.outputs.tag_name || github.ref }}
+      - uses: oven-sh/setup-bun@v2
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+      - name: Use an npm version with Trusted Publishing support
+        run: npm install -g npm@latest
+      - run: bun install --frozen-lockfile
+      - run: bun test
+      - run: bun run build
+      - name: Publish to npm (skipped if this version already exists)
+        run: |
+          NAME=$(node -p "require('./package.json').name")
+          VERSION=$(node -p "require('./package.json').version")
+          if npm view "$NAME@$VERSION" version >/dev/null 2>&1; then
+            echo "npm: $NAME@$VERSION already published, skipping"
+          else
+            npm publish --access public --provenance
+          fi
+
+  publish-jsr:
+    needs: release-please
+    if: always() && (needs.release-please.outputs.release_created == 'true' || github.event_name == 'workflow_dispatch')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write # OIDC: JSR publishing from the linked GitHub repository
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ needs.release-please.outputs.tag_name || github.ref }}
+      - uses: oven-sh/setup-bun@v2
+      - run: bun install --frozen-lockfile
+      - run: bun test
+      - name: Publish to JSR (skipped if this version already exists)
+        run: |
+          NAME=$(node -p "require('./jsr.json').name")
+          VERSION=$(node -p "require('./jsr.json').version")
+          if curl -fsS "https://jsr.io/$NAME/meta.json" | grep -q "\"$VERSION\""; then
+            echo "jsr: $NAME@$VERSION already published, skipping"
+          else
+            npx -y jsr publish
+          fi

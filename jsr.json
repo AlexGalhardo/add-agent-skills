@@ -1,0 +1,25 @@
+{
+    "$schema": "https://jsr.io/schema/config-file.v1.json",
+    "name": "@galhardoalex/add-agent-skills",
+    "version": "1.0.0",
+    "license": "MIT",
+    "exports": {
+        ".": "./src/mod.ts",
+        "./cli": "./src/bin.ts"
+    },
+    "publish": {
+        "include": [
+            "src/**/*.ts",
+            "src/**/*.json",
+            "README.md",
+            "LICENSE",
+            "jsr.json"
+        ],
+        "exclude": [
+            "tests",
+            "scripts",
+            "docs",
+            "skills"
+        ]
+    }
+}

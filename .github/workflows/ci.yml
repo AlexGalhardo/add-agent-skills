@@ -48,6 +48,35 @@ jobs:
       - run: npm install --omit=dev --ignore-scripts
       - run: node dist/cli.js --version
       - run: node dist/cli.js --list
+      - name: Install a real skill from GitHub
+        run: node dist/cli.js --skills karpathy-guidelines --agent claude --dir "$RUNNER_TEMP/app" --yes
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+      - run: test -s "$RUNNER_TEMP/app/.claude/skills/karpathy-guidelines/SKILL.md"
+
+  bun-compat:
+    name: Smoke test on Bun
+    needs: check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/download-artifact@v8
+        with:
+          name: dist
+          path: dist
+      - uses: oven-sh/setup-bun@v2
+      - run: bun install --production --ignore-scripts
+      - run: bun dist/cli.js --version
+      - run: bun dist/cli.js --list
+      - name: Install a real skill from GitHub (built CLI and sources)
+        run: |
+          bun dist/cli.js --skills karpathy-guidelines --agent agents --dir "$RUNNER_TEMP/app" --yes
+          bun src/bin.ts --skills grill-me --agent claude --dir "$RUNNER_TEMP/app" --yes
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+      - run: |
+          test -s "$RUNNER_TEMP/app/.agents/skills/karpathy-guidelines/SKILL.md"
+          test -s "$RUNNER_TEMP/app/.claude/skills/grill-me/SKILL.md"
 
   deno-compat:
     name: Smoke test on Deno
@@ -57,6 +86,12 @@ jobs:
       - uses: denoland/setup-deno@v2
         with:
           deno-version: v2.x
-      - run: deno install
+      # Only the CLI's own dependencies (not the dev toolchain).
+      - run: deno install --entrypoint src/bin.ts
       - run: deno check src/mod.ts src/bin.ts
       - run: deno run -A src/bin.ts --list
+      - name: Install a real skill from GitHub
+        run: deno run -A src/bin.ts --skills karpathy-guidelines --agent cursor --dir "$RUNNER_TEMP/app" --yes
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+      - run: test -s "$RUNNER_TEMP/app/.cursor/skills/karpathy-guidelines/SKILL.md"

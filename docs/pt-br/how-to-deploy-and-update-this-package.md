@@ -187,7 +187,7 @@ gh workflow run release.yml   # publica a 1.0.0 no npm e no JSR
 
 | Arquivo                                 | Função                                                              |
 | --------------------------------------- | ------------------------------------------------------------------- |
-| `.github/workflows/ci.yml`              | Lint, typecheck, testes, build, validação npm/JSR, smoke tests em Node 20–24 e Deno |
+| `.github/workflows/ci.yml`              | Lint, typecheck, testes, build, validação npm/JSR, smoke tests (instalação real) em Node 20–24, Bun e Deno |
 | `.github/workflows/release.yml`         | release-please + jobs independentes `publish-npm` e `publish-jsr`   |
 | `release-please-config.json`            | Tipo de release (node), bump de `jsr.json`, `skip-changelog`        |
 | `.release-please-manifest.json`         | Última versão lançada. É atualizado pelo release-please; não edite. |

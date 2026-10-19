@@ -1,5 +1,5 @@
 {
-    "updatedAt": "2026-10-15",
+    "updatedAt": "2026-10-19",
     "categories": [
         {
             "id": "most-used",
@@ -518,7 +518,7 @@
             "category": "web-design",
             "repo": "pbakaus/impeccable",
             "path": "plugin/skills/impeccable",
-            "description": "Use when the user wants to design, redesign, shape, critique, audit, polish, clarify, distill, harden, optimize, adapt, animate, colorize, extract, or otherwise improve a frontend interface. Covers websites, landing pages, dashboards, product UI, app shells, components, forms, settings, onboarding,…",
+            "description": "Use when the user wants to design, redesign, shape, critique, audit, polish, simplify, harden, animate, or otherwise improve a frontend interface: websites, landing pages, dashboards, product UI, components, forms, settings, onboarding, empty states, and native iOS or Android screens. Handles UX re…",
             "license": "Apache-2.0"
         },
         {
@@ -542,7 +542,7 @@
             "category": "web-design",
             "repo": "Leonxlnx/taste-skill",
             "path": "skills/minimalist-skill",
-            "description": "Clean editorial-style interfaces. Warm monochrome palette, typographic contrast, flat bento grids, muted pastels. No gradients, no heavy shadows.",
+            "description": "Classic style skill, opt-in: it runs only when called by name. Editorial product UI with a warm monochrome palette, typographic contrast and flat bento grids.",
             "license": "MIT"
         },
         {

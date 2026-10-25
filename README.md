@@ -60,11 +60,26 @@ Tip: some agents read more than one of these folders (Cursor reads `.cursor/skil
 | Mobile (Expo / React Native)  | [expo/skills](https://github.com/expo/skills), Vercel React Native                                            |
 | Go                            | [samber/cc-skills-golang](https://github.com/samber/cc-skills-golang)                                         |
 | Integrations                  | Neon, Stripe, Upstash, Nuxt UI, Loco                                                                          |
+| Productivity & Workflow       | Matt Pocock's writing and handoff skills, Obsidian                                                        |
+| Marketing / SEO / Sales       | [coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills)                         |
+| Cloud / Backend / Infra       | Azure, Cloudflare, Firebase, Supabase, Prisma, Convex, Vercel                                             |
+| AI Agents & MCP               | Google agents-cli, Anthropic skill-creator and mcp-builder, Orca                                          |
+| Browser & Web Automation      | Firecrawl, browser-act, Playwright                                                                        |
+| Video / Media / Creative      | Remotion, HeyGen Hyperframes, Higgsfield                                                                  |
+| Documents & Office            | Anthropic pptx, pdf, docx, xlsx                                                                           |
 
 See them all with `bunx @galhardoalex/add-agent-skills --list`. 
 
 Only well-known open source skills are included. Each one keeps its upstream license.
-    - `art-of-game-design` and `pixel-logic` are original summaries of books, hosted in this repository under [`skills/`](skills).
+
+`art-of-game-design` and `pixel-logic` are original summaries of books, hosted in this repository under [`skills/`](skills).
+
+## Skills from skills.sh
+
+The catalog also includes the most installed skills from the [skills.sh](https://www.skills.sh/) leaderboard (top 500 by
+installs at the time of the last update). Skills already present are not duplicated, skills that no longer exist upstream
+are skipped, and only official vendor repositories or repositories with roughly 500+ stars are kept. They are fetched from
+their own repositories like every other skill.
 
 ## Non-interactive mode
 

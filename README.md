@@ -1,25 +1,18 @@
-# add-agent-skills
+<div align="center">
+
+<h1>add-agent-skills</h1>
 
 [![npm](https://img.shields.io/npm/v/@galhardoalex/add-agent-skills)](https://www.npmjs.com/package/@galhardoalex/add-agent-skills)
 [![JSR](https://jsr.io/badges/@galhardoalex/add-agent-skills)](https://jsr.io/@galhardoalex/add-agent-skills)
 [![CI](https://github.com/AlexGalhardo/add-agent-skills/actions/workflows/ci.yml/badge.svg)](https://github.com/AlexGalhardo/add-agent-skills/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-Stop copying `.claude/skills/` between projects. Run one command, tick the skills you want in a checklist, and they are
-downloaded **straight from their official GitHub repositories, always at the latest version**.
+<h3>Stop copying or manually adding one <code>agent skills</code> at time between projects. Run one command, tick the skills you want in a checklist, and they are downloaded <b>straight from their official GitHub repositories, always at the latest version</b>.</h3>
+
+</div>
 
 ![add-agent-skills demo](docs/demo.gif)
 
-```
-◆  Select the skills to install
-│  Most Used
-│  ◼ karpathy-guidelines (https://github.com/multica-ai/andrej-karpathy-skills) -> Behavioral guidelines to reduce…
-│  ◻ grilling (https://github.com/mattpocock/skills) -> Grill the user relentlessly about a plan, decision, or idea…
-│  Software Development
-│  ◻ test-driven-development (https://github.com/addyosmani/agent-skills) -> Drives development with tests using…
-```
-
-[Leia em português](docs/pt-br/README.md)
 
 ## Usage
 
@@ -68,8 +61,10 @@ Tip: some agents read more than one of these folders (Cursor reads `.cursor/skil
 | Go                            | [samber/cc-skills-golang](https://github.com/samber/cc-skills-golang)                                         |
 | Integrations                  | Neon, Stripe, Upstash, Nuxt UI, Loco                                                                          |
 
-See them all with `bunx @galhardoalex/add-agent-skills --list`. Only well-known open source skills are included. Each one keeps its upstream license.
-`art-of-game-design` and `pixel-logic` are original summaries of books, hosted in this repository under [`skills/`](skills).
+See them all with `bunx @galhardoalex/add-agent-skills --list`. 
+
+Only well-known open source skills are included. Each one keeps its upstream license.
+    - `art-of-game-design` and `pixel-logic` are original summaries of books, hosted in this repository under [`skills/`](skills).
 
 ## Non-interactive mode
 
@@ -92,15 +87,10 @@ Downloads use the GitHub API (one request per repository). Without a token GitHu
 
 ## How it works
 
-`src/catalog.json` stores, for each skill, its official repository and the path of the skill inside it. At install time the
-CLI lists the repository tree at `HEAD` (the default branch) and downloads the skill's files from
+1. `src/catalog.json` stores, for each skill, its official repository and the path of the skill inside it. 
+2. At install time the CLI lists the repository tree at `HEAD` (the default branch) and downloads the skill's files from
 `raw.githubusercontent.com`, so you always get the latest version without waiting for a new release of this package.
-A weekly workflow refreshes the descriptions and flags skills that moved upstream.
-
-## Documentation
-
-- [Publishing and releases](docs/en/how-to-deploy-and-update-this-package.md) ([pt-br](docs/pt-br/how-to-deploy-and-update-this-package.md))
-- [Changelog](CHANGELOG.md)
+3. A weekly workflow refreshes the descriptions and flags skills that moved upstream.
 
 ## Contributing
 

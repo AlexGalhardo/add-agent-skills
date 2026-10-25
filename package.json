@@ -1,6 +1,6 @@
 {
     "name": "@galhardoalex/add-agent-skills",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "description": "Interactive CLI that installs curated, open source agent skills (SKILL.md) into .claude/skills, .agents/skills, .cursor/skills and .github/skills, always fetching the latest version from each skill's official GitHub repository.",
     "keywords": [
         "agent-skills",

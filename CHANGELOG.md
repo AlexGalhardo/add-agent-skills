@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-10-25
+
+### Added
+
+- Add 262 skills from the skills.sh top 500 plus caveman and clean architecture ([3929252](https://github.com/AlexGalhardo/add-agent-skills/commit/392925256b7d2ce2eef17cb51f2672f113474590))
+
 ## [1.0.0] - 2026-10-15
 
 ### Added
@@ -22,5 +28,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `catalog:refresh` script and weekly workflow that keep descriptions and licenses in sync with upstream.
 - Library API (`SkillDownloader`, `planInstall`, `writeSkill`, `CATALOG`, `AGENTS`) for scripts.
 
-[Unreleased]: https://github.com/AlexGalhardo/add-agent-skills/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/AlexGalhardo/add-agent-skills/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/AlexGalhardo/add-agent-skills/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/AlexGalhardo/add-agent-skills/releases/tag/v1.0.0

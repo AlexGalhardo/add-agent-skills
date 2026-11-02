@@ -1,5 +1,5 @@
 {
-    "updatedAt": "2026-10-25",
+    "updatedAt": "2026-11-02",
     "categories": [
         {
             "id": "most-used",
@@ -191,7 +191,7 @@
             "category": "software-development",
             "repo": "addyosmani/agent-skills",
             "path": "skills/code-simplification",
-            "description": "Simplifies code for clarity. Use when refactoring code for clarity without changing behavior. Use when code works but is harder to read, maintain, or extend than it should be. Use when reviewing code that has accumulated unnecessary complexity.",
+            "description": "Simplifies code for clarity. Use when refactoring code for clarity without changing behavior. Use when code works but is harder to read, maintain, or extend than it should be. Use when reviewing code that has accumulated unnecessary complexity. Use when asked to simplify, clean up, or reduce the ne…",
             "license": "MIT"
         },
         {
@@ -1060,7 +1060,7 @@
             "category": "mobile",
             "repo": "expo/skills",
             "path": "plugins/expo/skills/eas-observe",
-            "description": "Use for anything related to EAS Observe - adding `expo-observe` to an Expo project (AppMetricsRoot/ObserveRoot HOC, markInteractive and ObserveInteractiveMarker, the useObserve hook, the Expo Router / React Navigation integrations for per-route metrics, user-defined events via `Observe.logEvent`, e…",
+            "description": "Use for anything related to EAS Observe - adding `expo-observe` to an Expo project (AppMetricsRoot/ObserveRoot HOC, markInteractive and ObserveInteractiveMarker, the useObserve hook, the Expo Router / React Navigation integrations for per-route metrics, the expo-image and Reanimated integrations, u…",
             "license": "MIT"
         },
         {
@@ -1834,7 +1834,7 @@
             "category": "cloud",
             "repo": "microsoft/azure-skills",
             "path": "skills/azure-diagnostics",
-            "description": "Debug Azure production issues on Azure using AppLens, Azure Monitor, resource health, and safe triage. WHEN: debug production issues, troubleshoot app service, app service high CPU, app service deployment failure, troubleshoot container apps, container app 503 or target port mismatch, troubleshoot …",
+            "description": "Debug Azure production issues using AppLens, Azure Monitor, resource health, and safe triage, including evidence-only diagnosis without live access. WHEN: debug production issues, troubleshoot app service, app service high CPU, app service deployment failure, troubleshoot container apps, container …",
             "license": "MIT"
         },
         {
@@ -2529,7 +2529,7 @@
             "category": "ai-agents",
             "repo": "stablyai/orca",
             "path": "skills/orca-cli",
-            "description": "Operate Orca-managed worktrees, folder contexts, terminals, repos, automations, artifacts, skill sharing, worktree comments, and Orca's embedded browser through the `orca` CLI. Use when the user says \"$orca-cli\", \"Orca worktree\", \"child worktree\", \"spawn codex/claude in a worktree\", \"read/wait/send…",
+            "description": "Operate Orca-managed worktrees, folder contexts, terminals, repos, automations, worktree comments, and Orca's embedded browser through the `orca` CLI. Use when the user says \"$orca-cli\", \"Orca worktree\", \"child worktree\", \"spawn codex/claude in a worktree\", \"read/wait/send Orca terminal\", \"handoff\"…",
             "license": "MIT"
         },
         {
@@ -2537,7 +2537,7 @@
             "category": "ai-agents",
             "repo": "stablyai/orca",
             "path": "skills/orchestration",
-            "description": "Coordinate supervised Orca workers: threaded messages, blocking ask/reply, task dispatch, worker_done/escalation waits, task DAGs, decision gates, coordinator loops, and decomposing work across agents. Use `orca-cli` for full ownership handoffs — \"hand off\", \"handoff\", \"handover\", \"give this to ano…",
+            "description": "Run work in separate Orca worker agents and get their results back. Use when the user asks for Orca workers or supervision (monitor, task DAGs, ask/reply, decision gates), or when the work needs something your own subagents cannot give: a different agent (such as Codex from Claude) or its own Orca …",
             "license": "MIT"
         },
         {
@@ -3126,7 +3126,7 @@
             "category": "media",
             "repo": "higgsfield-ai/skills",
             "path": "higgsfield-video-explainer",
-            "description": "Build a complete non-photoreal narrated explainer or story video from ordered 10-second blocks: one narrator, one universal style key, one Seed Audio take and one Gemini Omni clip per block, then server-side assembly with explainer_video. Use when: \"make an explainer video\", \"explain this in a vide…",
+            "description": "Compatibility entry for the former video explainer skill. Use when: the user explicitly invokes higgsfield-video-explainer or continues its existing workflow. NOT for: new generic explainer requests, ads, single clips, or unrelated video edits.",
             "license": "MIT"
         },
         {
@@ -3612,7 +3612,7 @@
             "category": "ai-agents",
             "repo": "mastra-ai/skills",
             "path": "skills/mastra",
-            "description": "Comprehensive Mastra framework guide for building agents, workflows, tools, memory, workspaces, and storage with current APIs. Use for documentation lookup, API verification, TypeScript setup, common errors, migrations, and `mastra api` CLI tasks: inspect or call resources on local, Mastra platform…"
+            "description": "Comprehensive Mastra framework guide for building agents, workflows, tools, memory, workspaces, and storage with current APIs. Use for native capability discovery, logging, tracing, metrics/cost estimates, dataset experiments, documentation lookup, API verification, TypeScript setup, common errors,…"
         },
         {
             "name": "ads",
